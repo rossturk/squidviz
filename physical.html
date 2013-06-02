@@ -2,26 +2,35 @@
 <meta charset="utf-8">
 <style>
 
+@font-face {
+        font-family:'ApexSansMedium';
+        src:url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.eot');
+        src:url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.eot?#iefix') format('embedded-opentype'),
+                url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.woff') format('woff'),
+                url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.ttf') format('truetype'),
+                url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.svg#ApexSansBook') format('svg');
+        font-weight:normal;
+        font-style:normal;
+}
+
 .node {
   cursor: pointer;
 }
 
 .node circle {
-  fill: #efefef;
-  stroke: #efefef;
+  fill: #e6e8e8;
+  stroke: #e6e8e8;
   stroke-width: 1.5px;
 }
 
 .node text {
-  font: 16px 'Ubuntu Mono', sans-serif;
-;
-  font-weight: bold;
-  fill: #efefef;
+	font: 16px/1.2 'ApexSansMedium', Helvetica, Arial, sans-serif;
+	fill: #efefef;
 }
 
 .link {
   fill: none;
-  stroke: #ccc;
+  stroke: #f05c56;
   stroke-width: 1.5px;
 }
 
