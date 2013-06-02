@@ -6,13 +6,31 @@
 
 <style>
 
+@font-face {
+  font-family:'ApexSansMedium';
+  src:url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.eot');
+  src:url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.eot?#iefix') format('embedded-opentype'),
+      url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.woff') format('woff'),
+      url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.ttf') format('truetype'),
+      url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.svg#ApexSansBook') format('svg');
+  font-weight:normal;
+  font-style:normal;
+}
+
 body {
 	background-color: #37424a;
 	color: #efefef;
 }
 h1 {
-	font-family: 'Ubuntu Mono', sans-serif;
+	font: 24px/1.2 'ApexSansMedium', Helvetica, Arial, sans-serif;
 	text-align: center;
+	text-transform: uppercase;
+}
+
+label {
+	font: 12px/1.2 'ApexSansMedium', Helvetica, Arial, sans-serif;
+	margin-left: 10px;
+	text-transform: uppercase;
 }
 
 </style>
@@ -22,18 +40,20 @@ h1 {
 var pgver = 0;
 
 function refreshPage() {
-	$.ajax({
-		url: 'json/pgmap.php',
-		type: 'GET',
-		dataType: "json",
-		success: function(data) {
-			if (data['pgmap'] != pgver) {
-				console.log("new pgmap ver:" + data['pgmap']);
-				pgver = data['pgmap'];
-				$('#pgmap').attr('src', $('#pgmap').attr('src'));
+	if ($('#upd-logical').is(':checked')) {
+		$.ajax({
+			url: 'json/pgmap.php',
+			type: 'GET',
+			dataType: "json",
+			success: function(data) {
+				if (data['pgmap'] != pgver) {
+					console.log("new pgmap ver:" + data['pgmap']);
+					pgver = data['pgmap'];
+					$('#pgmap').attr('src', $('#pgmap').attr('src'));
+				}
 			}
-		}
-	});
+		});
+	}
 	setTimeout("refreshPage()", 1000);
 }
 
@@ -55,12 +75,13 @@ $(document).ready(function(){
 		<div class="logical" style="border: 1px solid #37424a; width: 490px;">
 		  <h1>Logical Infrastructure</h1>
 		  <hr style="border: 2px solid #efefef;" />
-		  <iframe scrolling="no" id="pgmap" name="pgmap" src="logical.html" FRAMEBORDER="0" style="width:490; margin: 0 0 0 0; padding:0; border:0; overflow:hidden;"></iframe>
+		  <iframe scrolling="no" id="pgmap" name="pgmap" src="logical.html" FRAMEBORDER="0" style="width:490; margin: 0 0 0 0; padding-bottom:10px; border:0; overflow:hidden;"></iframe>
+		  <center><input type="checkbox" id="upd-logical" name="upd-logical" checked><label>Auto-Update</label></center>
 		</div>
 		<div class="iops" style="border: 1px solid #37424a; width: 490px;">
 		  <h1>IO Statistics</h1>
 		  <hr style="border: 2px solid #efefef;" />
-		  <!-- <iframe scrolling="no" name="iops" src="iops.html" FRAMEBORDER="0" style="width:490; margin: 0 0 0 0; padding:0; border:0; height:200px; overflow:hidden;"></iframe> -->
+		  <iframe scrolling="no" name="iops" src="iops.html" FRAMEBORDER="0" style="width:490; margin: 0 0 0 0; padding:0; border:0; height:200px; overflow:hidden;"></iframe>
 		</div>
 	</div>
 </body>
