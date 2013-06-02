@@ -33,6 +33,10 @@ label {
 	text-transform: uppercase;
 }
 
+.logical {
+	height: 650px;
+}
+
 </style>
 
 <script>
@@ -49,6 +53,7 @@ function refreshPage() {
 				if (data['pgmap'] != pgver) {
 					console.log("new pgmap ver:" + data['pgmap']);
 					pgver = data['pgmap'];
+					$('#pgmap').fadeOut(600);
 					$('#pgmap').attr('src', $('#pgmap').attr('src'));
 				}
 			}
@@ -58,6 +63,17 @@ function refreshPage() {
 }
 
 $(document).ready(function(){
+
+	$('#upd-physical').click(function() {
+		$('#osdtree').attr('src', $('#osdtree').attr('src'));
+	});
+
+	$('#pgmap').fadeOut(600);
+
+	$('#pgmap').load(function() {
+		$('#pgmap').fadeIn(300);
+	});
+
 	setTimeout("refreshPage()", 1000);
 });
 
@@ -70,13 +86,14 @@ $(document).ready(function(){
 		<div class="physical" style="float:right; border: 1px solid #37424a; width: 550px;">
 		  <h1>Physical Infrastructure</h1>
 		  <hr style="border: 2px solid #efefef;" />
-		  <iframe scrolling="no" name="osdtree" src="physical.html" FRAMEBORDER="0" style="width:550; float: right; border:0; overflow:hidden;"></iframe>
+		  <center><input type="button" id="upd-physical" name="upd-physical" value="refresh"></center>
+		  <iframe scrolling="no" id="osdtree" name="osdtree" src="physical.html" FRAMEBORDER="0" style="width:550; float: right; border:0; overflow:hidden;"></iframe>
 		</div>
 		<div class="logical" style="border: 1px solid #37424a; width: 490px;">
 		  <h1>Logical Infrastructure</h1>
 		  <hr style="border: 2px solid #efefef;" />
-		  <iframe scrolling="no" id="pgmap" name="pgmap" src="logical.html" FRAMEBORDER="0" style="width:490; margin: 0 0 0 0; padding-bottom:10px; border:0; overflow:hidden;"></iframe>
 		  <center><input type="checkbox" id="upd-logical" name="upd-logical" checked><label>Auto-Update</label></center>
+		  <iframe scrolling="no" id="pgmap" name="pgmap" src="logical.html" FRAMEBORDER="0" style="width:490; height: 650px; margin: 0 0 0 0; padding-bottom:10px; border:0; overflow:hidden;"></iframe>
 		</div>
 		<div class="iops" style="border: 1px solid #37424a; width: 490px;">
 		  <h1>IO Statistics</h1>
