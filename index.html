@@ -1,5 +1,4 @@
-<html>
-<head>
+<html> <head>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
 <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
@@ -7,34 +6,106 @@
 <style>
 
 @font-face {
-  font-family:'ApexSansMedium';
-  src:url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.eot');
-  src:url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.eot?#iefix') format('embedded-opentype'),
-      url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.woff') format('woff'),
-      url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.ttf') format('truetype'),
-      url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.svg#ApexSansBook') format('svg');
-  font-weight:normal;
-  font-style:normal;
+	font-family:'ApexSansMedium';
+	src:url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.eot');
+	src:url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.eot?#iefix') format('embedded-opentype'),
+    		url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.woff') format('woff'),
+    		url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.ttf') format('truetype'),
+    		url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.svg#ApexSansBook') format('svg');
+	font-weight:normal;
+	font-style:normal;
+}
+
+html {
+	border-top: 5px solid #f05c56;
+	border-bottom: 5px solid #f05c56;
 }
 
 body {
-	background-color: #37424a;
-	color: #efefef;
+	background-color: #55AEBA;
+	color: #e6e8e8;
 }
+
 h1 {
 	font: 24px/1.2 'ApexSansMedium', Helvetica, Arial, sans-serif;
 	text-align: center;
-	text-transform: uppercase;
+	text-transform: lowercase;
+}
+
+hr {
+	border: 1px solid #e6e8e8;
 }
 
 label {
 	font: 12px/1.2 'ApexSansMedium', Helvetica, Arial, sans-serif;
 	margin-left: 10px;
-	text-transform: uppercase;
+	text-transform: lowercase;
 }
 
-.logical {
+.container {
+	width: 1170px;
+	margin: 0 auto;
+}
+
+.widget {
+	border: 1px solid #37424a;
+	border-radius: 7px;
+	background-color: #37424a;
+	width: 550px;
+	padding: 10px;
+}
+
+#logical {
 	height: 650px;
+}
+
+#physical {
+	float:right;
+}
+
+#iops {
+	margin-top: 10px;
+}
+
+#iopsgraph {
+	width: 550px;
+	margin: 0 0 0 0;
+	padding: 0;
+	border: 0;
+	height: 200px;
+	overflow: hidden;
+}
+
+#pgmap {
+	width: 550px;
+	height: 650px;
+	margin: 0 10px 0 25px;
+	padding-bottom: 10px;
+	border: 0;
+	overflow: hidden;
+}
+
+#osdtree {
+	width: 550px;
+	float: right;
+	border: 0;
+	overflow: hidden;
+}
+
+#upd-physical {
+	text-transform: lowercase;
+	background-color: #f05c56;
+	width: auto;
+	font-size: 11px;
+	color: #fff;
+	text-transform: uppercase;
+	border: none;
+	padding: 7px 20px;
+	overflow: visible;
+}
+
+#upd-physical:hover {
+	text-decoration: underline;
 }
 
 </style>
@@ -50,10 +121,12 @@ function refreshPage() {
 			type: 'GET',
 			dataType: "json",
 			success: function(data) {
-				if (data['pgmap'] != pgver) {
+				if (pgver == 0) {
+					pgver = data['pgmap'];
+				} else if (data['pgmap'] != pgver) {
 					console.log("new pgmap ver:" + data['pgmap']);
 					pgver = data['pgmap'];
-					$('#pgmap').fadeOut(600);
+					$('#pgmap').fadeOut(200);
 					$('#pgmap').attr('src', $('#pgmap').attr('src'));
 				}
 			}
@@ -68,10 +141,10 @@ $(document).ready(function(){
 		$('#osdtree').attr('src', $('#osdtree').attr('src'));
 	});
 
-	$('#pgmap').fadeOut(600);
+	$('#pgmap').fadeOut(200);
 
 	$('#pgmap').load(function() {
-		$('#pgmap').fadeIn(300);
+		$('#pgmap').fadeIn(400);
 	});
 
 	setTimeout("refreshPage()", 1000);
@@ -81,24 +154,24 @@ $(document).ready(function(){
 </script>
 
 </head>
-<body style="margin:0; padding:0;">
-	<div class="container" style="width: 1170px; margin: 0 auto;">
-		<div class="physical" style="float:right; border: 1px solid #37424a; width: 550px;">
-		  <h1>Physical Infrastructure</h1>
-		  <hr style="border: 2px solid #efefef;" />
+<body>
+	<div class="container">
+		<div class="widget" id="physical">
+		  <h1>physical</h1>
+		  <hr />
 		  <center><input type="button" id="upd-physical" name="upd-physical" value="refresh"></center>
-		  <iframe scrolling="no" id="osdtree" name="osdtree" src="physical.html" FRAMEBORDER="0" style="width:550; float: right; border:0; overflow:hidden;"></iframe>
+		  <iframe scrolling="no" id="osdtree" name="osdtree" src="physical.html" FRAMEBORDER="0"></iframe>
 		</div>
-		<div class="logical" style="border: 1px solid #37424a; width: 490px;">
-		  <h1>Logical Infrastructure</h1>
-		  <hr style="border: 2px solid #efefef;" />
+		<div class="widget" id="logical">
+		  <h1>logical</h1>
+		  <hr />
 		  <center><input type="checkbox" id="upd-logical" name="upd-logical" checked><label>Auto-Update</label></center>
-		  <iframe scrolling="no" id="pgmap" name="pgmap" src="logical.html" FRAMEBORDER="0" style="width:490; height: 650px; margin: 0 0 0 0; padding-bottom:10px; border:0; overflow:hidden;"></iframe>
+		  <iframe scrolling="no" id="pgmap" name="pgmap" src="logical.html" FRAMEBORDER="0"></iframe>
 		</div>
-		<div class="iops" style="border: 1px solid #37424a; width: 490px;">
-		  <h1>IO Statistics</h1>
-		  <hr style="border: 2px solid #efefef;" />
-		  <iframe scrolling="no" name="iops" src="iops.html" FRAMEBORDER="0" style="width:490; margin: 0 0 0 0; padding:0; border:0; height:200px; overflow:hidden;"></iframe>
+		<div class="widget" id="iops">
+		  <h1>iops</h1>
+		  <hr />
+		  <iframe scrolling="no" id="iopsgraph" name="iops" src="iops.html" FRAMEBORDER="0"></iframe>
 		</div>
 	</div>
 </body>
