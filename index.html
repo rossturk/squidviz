@@ -69,6 +69,12 @@ label {
 	padding-top: 10px;
 }
 
+.panel {
+	width: 1100px;
+	box-shadow: 1px 1px 50px rgba(0,0,0,0.07);
+	display: block;
+}
+
 .widget {
 	//border: 1px solid #5E6A71;
 	//border-radius: 7px;
@@ -78,6 +84,16 @@ label {
 	padding-bottom: 10px;
 	box-shadow: 1px 1px 50px rgba(0,0,0,0.07);
 	display: block;
+}
+
+#shellinabox {
+	width: 1100px;
+	height: 300px;
+	margin: 0;
+	padding-bottom: 10px;
+	border: 0;
+	overflow: hidden;
+	background-color: #37424a;
 }
 
 #logical {
@@ -210,6 +226,10 @@ $(document).ready(function(){
 		<div class="header">
 			<img src="images/logo.png">
 			<h1><font color="#f05c56">Squid</font>Viz</h1>
+		</div>
+
+		<div class="panel" id="console">
+			<iframe scrolling="no" id="shellinabox" name="shellinabox" src="http://10.211.55.5:4200"></iframe>
 		</div>
 
 		<div class="widget" id="physical">
