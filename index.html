@@ -6,6 +6,18 @@
 <style>
 
 @font-face {
+  font-family:'ApexSansBook';
+  src:url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Book.eot');
+  src:url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Book.eot?#iefix') format('embedded-opentype'),
+      url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Book.woff') format('woff'),
+      url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Book.ttf') format('truetype'),
+      url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Book.svg#ApexSansBook') format('svg');
+  font-weight:normal;
+  font-style:normal;
+}
+
+
+@font-face {
 	font-family:'ApexSansMedium';
 	src:url('fonts/ApexSans-Medium.eot');
 	src:url('fonts/ApexSans-Medium.eot?#iefix') format('embedded-opentype'),
@@ -33,13 +45,22 @@ body {
 
 h1 {
 	font: 24px/1.2 'ApexSansMedium', Helvetica, Arial, sans-serif;
+	font:normal 21px/1.2 'ApexSansBook', Helvetica, Arial, sans-serif;
 	text-align: center;
 	text-transform: uppercase;
+	margin: 0px 0 10px 0;
 }
 
 hr {
-	border: 1px solid #5e6a71;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-left: 0px; border-right: 0px;
 }
+
+#logical hr { border-top: 1px solid #acacac; }
+#physical hr { border-top: 1px solid rgb(220,220,220); }
+#iops hr { border-top: 1px solid #b9b9b9; }
+
 
 label {
 	font: 12px/1.2 'ApexSansMedium', Helvetica, Arial, sans-serif;
@@ -48,19 +69,20 @@ label {
 }
 
 .container {
-	width: 1170px;
+	width: 1100px;
 	margin: 0 auto;
 	padding-top: 10px;
 }
 
 .widget {
 	//border: 1px solid #5E6A71;
-	border-radius: 7px;
+	//border-radius: 7px;
 	background-color: #e6e8e8;
 	width: 550px;
-	padding: 10px;
-	box-shadow: 2px 2px 3px #888888;
-
+	padding-top: 10px;
+	padding-bottom: 10px;
+	box-shadow: 1px 1px 50px rgba(0,0,0,0.07);
+	display: block;
 }
 
 #logical {
@@ -68,12 +90,14 @@ label {
 }
 
 #physical {
-	height: 952px;
+	height: 917px;
+	background-color: #fff;
 	float:right;
 }
 
 #iops {
-	margin-top: 10px;
+	// margin-top: 10px;
+	background-color: #f4f3f3;
 }
 
 #iopsgraph {
@@ -118,8 +142,8 @@ label {
 }
 
 .header {
-	width: 100%;
-	margin: 20px 0;
+	width: 1060px;
+	margin: 20px;
 }
 
 .header h1 {
@@ -182,7 +206,7 @@ $(document).ready(function(){
 	<div class="container">
 		<div class="header">
 			<img src="images/logo.png">
-			<h1>Testviz</h1>
+			<h1><font color="#f05c56">Squid</font>Viz</h1>
 		</div>
 
 		<div class="widget" id="physical">

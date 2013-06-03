@@ -20,7 +20,7 @@
 .node circle {
   fill: #55aeba;
   stroke: #55aeba;
-  stroke-width: 1.5px;
+  //stroke-width: 2px;
 }
 
 .node text {
@@ -102,7 +102,14 @@ function update(source) {
 
   nodeEnter.append("circle")
       .attr("r", 1e-6)
-      .style("fill", function(d) { return (d.status == "up" ? "green" : "red"); });
+      .style("fill", function(d) {
+		console.log(d.depth);
+		switch (d.depth) {
+			case 0: return "#55aeba";
+			case 1: return "#55aeba";
+			case 2: return (d.status == "up" ? "green" : "red");
+		}
+      });
 
   nodeEnter.append("text")
       .attr("x", function(d) { return d.children || d._children ? -15 : 15; })
@@ -118,7 +125,14 @@ function update(source) {
 
   nodeUpdate.select("circle")
       .attr("r", 8)
-      .style("fill", function(d) { return (d.status == "down" ? "red" : "green"); });
+      .style("fill", function(d) {
+		console.log(d.depth);
+		switch (d.depth) {
+			case 0: return "#55aeba";
+			case 1: return "#55aeba";
+			case 2: return (d.status == "up" ? "green" : "red");
+		}
+      });
 
   nodeUpdate.select("text")
       .style("fill-opacity", 1);
