@@ -1,21 +1,19 @@
 <html> <head>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
-<link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
 
 <style>
 
 @font-face {
-  font-family:'ApexSansBook';
-  src:url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Book.eot');
-  src:url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Book.eot?#iefix') format('embedded-opentype'),
-      url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Book.woff') format('woff'),
-      url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Book.ttf') format('truetype'),
-      url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Book.svg#ApexSansBook') format('svg');
-  font-weight:normal;
-  font-style:normal;
+font-family:'ApexSansBook';
+	src:url('fonts/ApexSans-Book.eot');
+	src:url('fonts/ApexSans-Book.eot?#iefix') format('embedded-opentype'),
+		url('fonts/ApexSans-Book.woff') format('woff'),
+		url('fonts/ApexSans-Book.ttf') format('truetype'),
+		url('fonts/ApexSans-Book.svg#ApexSansBook') format('svg');
+	font-weight:normal;
+	font-style:normal;
 }
-
 
 @font-face {
 	font-family:'ApexSansMedium';
@@ -30,16 +28,13 @@
 
 html {
 	border-top: 5px solid #f05c56;
-	border-bottom: 5px solid #f05c56;
 }
 
 body {
-	// background-color: #37424a;
-	// background:url(images/body.gif) top center fixed #47525a;
 	background:url(images/body.png) top center #cfd1d0; 
 	color: #37424a;
 	border-top: 8px solid #80D2DC;
-	margin: 0px;
+	margin: 0px 0px 20px 0px;
 	padding: 0px;
 }
 
@@ -156,6 +151,14 @@ label {
 	float: right;
 }
 
+#bottom {
+	font-size: 12px;
+	color: #606C73;
+	display: block;
+	margin-top: 10px;
+	text-align: center;
+}
+
 </style>
 
 <script>
@@ -226,6 +229,9 @@ $(document).ready(function(){
 		  <hr />
 		  <iframe scrolling="no" id="iopsgraph" name="iops" src="iops.html" FRAMEBORDER="0"></iframe>
 		</div>
+	</div>
+	<div id="bottom">
+		<p>&copy;2013, Inktank Storage, Inc.. All rights reserved.</p>
 	</div>
 </body>
 </html>
