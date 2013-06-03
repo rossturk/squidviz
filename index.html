@@ -1,0 +1,38 @@
+<html>
+<head>
+
+<link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
+
+<style>
+
+body {
+	background-color: #37424a;
+	color: #efefef;
+}
+h1 {
+	font-family: 'Ubuntu Mono', sans-serif;
+	text-align: center;
+}
+
+</style>
+</head>
+<body style="margin:0; padding:0;">
+	<div class="container" style="width: 1170px; margin: 0 auto;">
+		<div class="physical" style="float:right; border: 1px solid #37424a; width: 550px;">
+		  <h1>Physical Infrastructure</h1>
+		  <hr style="border: 2px solid #efefef;" />
+		  <iframe scrolling="no" name="osdtree" src="physical.html" FRAMEBORDER="0" style="width:550; float: right; border:0; overflow:hidden;"></iframe>
+		</div>
+		<div class="logical" style="border: 1px solid #37424a; width: 490px;">
+		  <h1>Logical Infrastructure</h1>
+		  <hr style="border: 2px solid #efefef;" />
+		  <iframe scrolling="no" name="pgmap" src="logical.html" FRAMEBORDER="0" style="width:490; margin: 0 0 0 0; padding:0; border:0; overflow:hidden;"></iframe>
+		</div>
+		<div class="iops" style="border: 1px solid #37424a; width: 490px;">
+		  <h1>IO Statistics</h1>
+		  <hr style="border: 2px solid #efefef;" />
+		  <iframe scrolling="no" name="iops" src="line.html" FRAMEBORDER="0" style="width:490; margin: 0 0 0 0; padding:0; border:0; height:200px; overflow:hidden;"></iframe>
+		</div>
+	</div>
+</body>
+</html>
