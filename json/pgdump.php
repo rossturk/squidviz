@@ -11,7 +11,7 @@ $file = shell_exec('ceph pg dump --format=json');
 $input_json = json_decode(preg_replace('/^.+\n/', '', $file));
 
 
-$pgTree = array('name' => 'cluster', 'children' => array());
+$pgTree = array('name' => 'cluster', 'version' => $input_json->version, 'children' => array());
 
 foreach ( $input_json->pg_stats as $pg )
 {
