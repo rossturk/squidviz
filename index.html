@@ -1,6 +1,7 @@
 <html>
 <head>
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
 <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
 
 <style>
@@ -15,6 +16,34 @@ h1 {
 }
 
 </style>
+
+<script>
+
+var pgver = 0;
+
+function refreshPage() {
+	$.ajax({
+		url: 'json/pgmap.php',
+		type: 'GET',
+		dataType: "json",
+		success: function(data) {
+			if (data['pgmap'] != pgver) {
+				console.log("new pgmap ver:" + data['pgmap']);
+				pgver = data['pgmap'];
+				$('#pgmap').attr('src', $('#pgmap').attr('src'));
+			}
+		}
+	});
+	setTimeout("refreshPage()", 1000);
+}
+
+$(document).ready(function(){
+	setTimeout("refreshPage()", 1000);
+});
+
+
+</script>
+
 </head>
 <body style="margin:0; padding:0;">
 	<div class="container" style="width: 1170px; margin: 0 auto;">
@@ -26,12 +55,12 @@ h1 {
 		<div class="logical" style="border: 1px solid #37424a; width: 490px;">
 		  <h1>Logical Infrastructure</h1>
 		  <hr style="border: 2px solid #efefef;" />
-		  <iframe scrolling="no" name="pgmap" src="logical.html" FRAMEBORDER="0" style="width:490; margin: 0 0 0 0; padding:0; border:0; overflow:hidden;"></iframe>
+		  <iframe scrolling="no" id="pgmap" name="pgmap" src="logical.html" FRAMEBORDER="0" style="width:490; margin: 0 0 0 0; padding:0; border:0; overflow:hidden;"></iframe>
 		</div>
 		<div class="iops" style="border: 1px solid #37424a; width: 490px;">
 		  <h1>IO Statistics</h1>
 		  <hr style="border: 2px solid #efefef;" />
-		  <iframe scrolling="no" name="iops" src="iops.html" FRAMEBORDER="0" style="width:490; margin: 0 0 0 0; padding:0; border:0; height:200px; overflow:hidden;"></iframe>
+		  <!-- <iframe scrolling="no" name="iops" src="iops.html" FRAMEBORDER="0" style="width:490; margin: 0 0 0 0; padding:0; border:0; height:200px; overflow:hidden;"></iframe> -->
 		</div>
 	</div>
 </body>

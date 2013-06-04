@@ -58,11 +58,9 @@ d3.json("json/pgdump.php", function(error, root) {
     .style("fill", function(d) {
 	switch (d.depth) {
 		case 0:
-        	return "#5E6A71";
-			break;
+        		return "#5E6A71";
 		case 1:
-        	return color((d.children ? d : d.parent).name);
-			break;
+        		return color((d.children ? d : d.parent).name);
 		case 2:
 			switch (d.state) {
 				case "active+clean": return "#00cc00";
@@ -72,21 +70,39 @@ d3.json("json/pgdump.php", function(error, root) {
 				case "active+degraded": return "#ff6600";
 				case "active+clean+replay": return "#000000";
 				case "peering": return "#0000aa";
-				default: return "#000000";
+				case "active+recovering+remapped": return "#008888";
+				case "active+remapped": return "#008800";
+				case "active+recovery_wait+remapped": return "#006666";
+				default: console.log(d.state); return "#000000";
 			}
-			break;
 		default:
-        	return color((d.children ? d : d.parent).name);
+        		return color((d.children ? d : d.parent).name);
 	}
     })
     .on("click", click);
 
   var text = g.append("text")
-    .attr("transform", function(d) { return "rotate(" + computeTextRotation(d) + ")"; })
+    .attr("transform", function(d) {
+	switch (d.depth) {
+		case 0:
+        		return;
+		default:
+			return "rotate(" + computeTextRotation(d) + ")";
+	}
+    })
     .attr("x", function(d) { return y(d.y); })
     .attr("dx", "6") // margin
     .attr("dy", ".35em") // vertical-align
-    .text(function(d) { return (d.depth == 1 ? "pool: "+d.name : ""); });
+    .text(function(d) {
+	switch (d.depth) {
+		case 0:
+        		return "v"+d.version;
+		case 1:
+        		return "pool: " + d.name;
+		default:
+        		return "";
+	}
+    });
 
   function click(d) {
     // fade out all text elements

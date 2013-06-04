@@ -83,17 +83,19 @@ tick();
  
 function tick() {
  
-	d3.json("iops.php", function(result) {
+	d3.json("json/iops.php", function(result) {
 
-		console.log(result);
-		
 		// push a new data point onto the back
-		data.push(result['ops']);
+		if (result['ops'] > 0) {
+			data.push(result['ops']);
+		} else {
+			data.push(0);
+		}
 		
 		// redraw the line, and slide it to the left
 		path
 		  .attr("d", line)
-		  .attr("transform", null)
+		  .attr("transform", "")
 		.transition()
 		  .duration(500)
 		  .ease("linear")
