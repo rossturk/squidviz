@@ -5,17 +5,17 @@
 
 @font-face {
         font-family:'ApexSansMedium';
-        src:url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.eot');
-        src:url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.eot?#iefix') format('embedded-opentype'),
-                url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.woff') format('woff'),
-                url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.ttf') format('truetype'),
-                url('http://ceph.com/wp-content/themes/ceph/fonts/ApexSans-Medium.svg#ApexSansBook') format('svg');
+        src:url('fonts/ApexSans-Medium.eot');
+        src:url('fonts/ApexSans-Medium.eot?#iefix') format('embedded-opentype'),
+                url('fonts/ApexSans-Medium.woff') format('woff'),
+                url('fonts/ApexSans-Medium.ttf') format('truetype'),
+                url('fonts/ApexSans-Medium.svg#ApexSansBook') format('svg');
         font-weight:normal;
         font-style:normal;
 }
 
 path {
-  stroke: #aaa;
+  stroke: #efefef;
   fill-rule: evenodd;
 }
 
@@ -76,16 +76,17 @@ d3.json("json/pgdump.php", function(error, root) {
         		return color((d.children ? d : d.parent).name);
 		case 2:
 			switch (d.state) {
-				case "active+clean": return "#00cc00";
-				case "active+recovery_wait": return "#666600";
-				case "active+recovering": return "#888800";
-				case "stale+active+clean": return "#888888";
-				case "active+degraded": return "#ff6600";
-				case "active+clean+replay": return "#000000";
-				case "peering": return "#0000aa";
-				case "active+recovering+remapped": return "#008888";
-				case "active+remapped": return "#008800";
-				case "active+recovery_wait+remapped": return "#006666";
+				case "active+clean": return "#00cc00"; // green
+				case "active+recovery_wait": return "#666600"; // mustard
+				case "active+recovering": return "#888800"; // yellow
+				case "stale+active+clean": return "#888888"; // grey
+				case "active+degraded": return "#ff6600"; // orange
+				case "active+clean+replay": return "#000000"; // black
+				case "peering": return "#0000aa"; // blue
+				case "active+recovering+remapped": return "#008888"; // teal
+				case "active+remapped": return "#008800"; // dark green
+				case "active+recovery_wait+remapped": return "#006666"; // dark teal
+				case "creating": return "#a809ca"; // purple
 				default: console.log(d.state); return "#000000";
 			}
 		default:
@@ -103,6 +104,7 @@ d3.json("json/pgdump.php", function(error, root) {
 			return "rotate(" + computeTextRotation(d) + ")";
 	}
     })
+    .attr("text-anchor", function(d) { return (d.depth == 0 ? "middle" : "start"); })
     .attr("x", function(d) { return y(d.y); })
     .attr("dx", "6") // margin
     .attr("dy", ".35em") // vertical-align
