@@ -102,7 +102,6 @@ function update(source) {
   nodeEnter.append("circle")
       .attr("r", 1e-6)
       .style("fill", function(d) {
-		console.log(d.depth);
 		switch (d.depth) {
 			case 0: return "#55aeba";
 			case 1: return "#55aeba";
@@ -125,7 +124,6 @@ function update(source) {
   nodeUpdate.select("circle")
       .attr("r", 8)
       .style("fill", function(d) {
-		console.log(d.depth);
 		switch (d.depth) {
 			case 0: return "#55aeba";
 			case 1: return "#55aeba";
