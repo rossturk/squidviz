@@ -2,18 +2,20 @@
 
 header("Content-Type: application/json");
 
-//$name = 'cephdemo-pgdump.json';
-//$fp = fopen($name, 'r');
-//$file = file_get_contents($name,0,null,null);
+$pools = array();
+
+$file = shell_exec('ceph osd dump --format=json');
+$osd_dump = json_decode($file);
+
+
+foreach ( $osd_dump->pools as $pool ) { $pools[$pool->pool] = $pool->pool_name; }
 
 $file = shell_exec('ceph pg dump --format=json');
+$pg_dump = json_decode(preg_replace('/^.+\n/', '', $file));
 
-$input_json = json_decode(preg_replace('/^.+\n/', '', $file));
+$pgTree = array('name' => 'cluster', 'version' => $pg_dump->version, 'children' => array());
 
-
-$pgTree = array('name' => 'cluster', 'version' => $input_json->version, 'children' => array());
-
-foreach ( $input_json->pg_stats as $pg )
+foreach ( $pg_dump->pg_stats as $pg )
 {
 	list ($pool, $group) = explode('.', $pg->pgid);
 	
@@ -26,6 +28,7 @@ foreach ( $input_json->pg_stats as $pg )
 
 	$pgNode = array(
 		"name" => $group,
+		"pool_name" => $pools[$pool],
 		"pgid" => $pg->pgid,
 		"objects" => $pg->stat_sum->num_objects,
 		"state" => $pg->state
@@ -39,6 +42,7 @@ foreach ( $input_json->pg_stats as $pg )
 	{
 		$pgTree['children'][] = array(
 			"name" => $pool,
+			"pool_name" => $pools[$pool],
 			"children" => array($pgNode)
 		);
    	}

@@ -20,7 +20,7 @@ path {
 }
 
 text {
-  font: 14px/1.2 'ApexSansMedium', Helvetica, Arial, sans-serif;
+  font: 12px/1.2 'ApexSansMedium', Helvetica, Arial, sans-serif;
 }
 
 text.center {
@@ -108,15 +108,18 @@ d3.json("json/pgdump.php", function(error, root) {
     .attr("dx", "6") // margin
     .attr("dy", ".35em") // vertical-align
     .text(function(d) {
+	console.log(d);
 	switch (d.depth) {
 		case 0:
         		return "v"+d.version;
 		case 1:
-        		return "pool: " + d.name;
+        		return d.pool_name;
 		default:
         		return "";
 	}
     });
+
+    var tooltips = g.append("svg:title").text(function(d) { return d.state; });
 
   function click(d) {
     // fade out all text elements
