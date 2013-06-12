@@ -111,6 +111,34 @@ label {
 	background-color: #f4f3f3;
 }
 
+#legend {
+	width: 1080px;
+	margin: 0;
+	padding: 10px;
+	border: 0;
+	overflow: hidden;
+
+	background-image: linear-gradient(bottom, rgb(209,209,209) 24%, rgb(230,232,232) 80%);
+	background-image: -o-linear-gradient(bottom, rgb(209,209,209) 24%, rgb(230,232,232) 80%);
+	background-image: -moz-linear-gradient(bottom, rgb(209,209,209) 24%, rgb(230,232,232) 80%);
+	background-image: -webkit-linear-gradient(bottom, rgb(209,209,209) 24%, rgb(230,232,232) 80%);
+	background-image: -ms-linear-gradient(bottom, rgb(209,209,209) 24%, rgb(230,232,232) 80%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.24, rgb(209,209,209)),
+		color-stop(0.8, rgb(230,232,232))
+	);
+	
+	//background-color: #a2a9ad;
+}
+
+#legend {
+	color: #37424a;
+}
+
 #iopsgraph {
 	width: 550px;
 	margin: 0 0 0 0;
@@ -179,6 +207,11 @@ label {
 	float: left;
 }
 
+.widget h1 a {
+	color: #37424a;
+	text-decoration: none;
+}
+
 #bottom {
 	font-size: 12px;
 	color: #606C73;
@@ -187,6 +220,24 @@ label {
 	text-align: center;
 }
 
+dl {
+	text-align: center;
+}
+
+dt {
+        width: 200px;
+        border: 1px solid #37424a;
+        padding: 0px 8px;
+}
+
+dt, dd {
+        display: inline;
+}
+
+dd {
+        font: 12px/1.2 'ApexSansBook', Helvetica, Arial, sans-serif;
+	margin: 0px 15px 0px 10px;
+}
 </style>
 
 <script>
@@ -203,7 +254,6 @@ function refreshPage() {
 				if (pgver == 0) {
 					pgver = data['pgmap'];
 				} else if (data['pgmap'] != pgver) {
-					console.log("new pgmap ver:" + data['pgmap']);
 					pgver = data['pgmap'];
 					$('#pgmap').fadeOut(200);
 					$('#pgmap').attr('src', $('#pgmap').attr('src'));
@@ -217,6 +267,7 @@ function refreshPage() {
 $(document).ready(function(){
 
 	$("#console").hide();
+	$("#legend").hide();
 	$('#pgmap').fadeOut(200);
 
 	$('#upd-physical').click(function() {
@@ -229,6 +280,10 @@ $(document).ready(function(){
 	
 	$('#hide-console').click(function() {
 		$("#console").slideToggle();
+	});
+
+	$('#hide-legend').click(function() {
+		$("#legend").slideToggle();
 	});
 
 	setTimeout("refreshPage()", 1000);
@@ -249,6 +304,35 @@ $(document).ready(function(){
 			<iframe scrolling="no" id="shellinabox" name="shellinabox" src="http://10.211.55.5:4200"></iframe>
 		</div>
 
+		<div class="panel" id="legend">
+			<dl>
+				<dt style="background-color: #00cc00"></dt>
+				<dd>active+clean</dd>
+				<dt style="background-color: #008800"></dt>
+				<dd>active+remapped</dd>
+				<dt style="background-color: #888800"></dt>
+				<dd>active+recovering</dd>
+				<dt style="background-color: #666600"></dt>
+				<dd>active+recovery_wait</dd>
+				<dt style="background-color: #008888"></dt>
+				<dd>active+recovering+remapped</dd>
+				<dt style="background-color: #006666"></dt>
+				<dd>active+recovery_wait+remapped</dd>
+			</dl>
+			<dl>
+				<dt style="background-color: #ff6600"></dt>
+				<dd>active+degraded</dd>
+				<dt style="background-color: #000000"></dt>
+				<dd>active+clean+replay</dd>
+				<dt style="background-color: #0000aa"></dt>
+				<dd>peering</dd>
+				<dt style="background-color: #a809ca"></dt>
+				<dd>creating</dd>
+				<dt style="background-color: #888888"></dt>
+				<dd>stale+active+clean</dd>
+			</dl>
+		</div>
+
 		<div class="widget" id="physical">
 		  <h1>physical</h1>
 		  <hr />
@@ -256,7 +340,7 @@ $(document).ready(function(){
 		  <iframe scrolling="no" id="osdtree" name="osdtree" src="physical.html" FRAMEBORDER="0"></iframe>
 		</div>
 		<div class="widget" id="logical">
-		  <h1>logical</h1>
+		  <h1><a id="hide-legend" style="text-decoration: none" href="#">logical</a></h1>
 		  <hr />
 		  <center><input type="checkbox" id="upd-logical" name="upd-logical" checked><label>Auto-Update</label></center>
 		  <iframe scrolling="no" id="pgmap" name="pgmap" src="logical.html" FRAMEBORDER="0"></iframe>
