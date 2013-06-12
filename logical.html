@@ -98,7 +98,7 @@ d3.json("json/pgdump.php", function(error, root) {
     .attr("transform", function(d) {
 	switch (d.depth) {
 		case 0:
-        		return;
+        		return "rotate(0)";
 		default:
 			return "rotate(" + computeTextRotation(d) + ")";
 	}
@@ -108,7 +108,6 @@ d3.json("json/pgdump.php", function(error, root) {
     .attr("dx", "6") // margin
     .attr("dy", ".35em") // vertical-align
     .text(function(d) {
-	console.log(d);
 	switch (d.depth) {
 		case 0:
         		return "v"+d.version;
@@ -119,7 +118,16 @@ d3.json("json/pgdump.php", function(error, root) {
 	}
     });
 
-    var tooltips = g.append("svg:title").text(function(d) { return d.state; });
+  var tooltips = g.append("svg:title").text(function(d) {
+	switch (d.depth) {
+		case 0:
+        		return "";
+		case 1:
+        		return "";
+		default:
+			return d.objects+":"+d.state;
+	}
+    });
 
   function click(d) {
     // fade out all text elements
@@ -136,7 +144,14 @@ d3.json("json/pgdump.php", function(error, root) {
             // fade in the text element and recalculate positions
             arcText.transition().duration(300)
               .attr("opacity", 1)
-              .attr("transform", function() { return "rotate(" + computeTextRotation(e) + ")" })
+              .attr("transform", function(d) {
+                  switch (d.depth) {
+                    case 0:
+                      return "rotate(0)";
+                    default:
+                      return "rotate(" + computeTextRotation(d) + ")";
+                  }
+              })
               .attr("x", function(d) { return y(d.y); });
           }
       });
