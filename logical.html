@@ -75,17 +75,19 @@ d3.json("json/pgdump.php", function(error, root) {
         		return color((d.children ? d : d.parent).name);
 		case 2:
 			switch (d.state) {
-				case "active+clean": return "#00cc00"; // green
-				case "active+recovery_wait": return "#666600"; // mustard
-				case "active+recovering": return "#888800"; // yellow
-				case "stale+active+clean": return "#888888"; // grey
-				case "active+degraded": return "#ff6600"; // orange
-				case "active+clean+replay": return "#000000"; // black
-				case "peering": return "#0000aa"; // blue
-				case "active+recovering+remapped": return "#008888"; // teal
-				case "active+remapped": return "#008800"; // dark green
-				case "active+recovery_wait+remapped": return "#006666"; // dark teal
-				case "creating": return "#a809ca"; // purple
+				case "active+clean": return "#00de00";
+				case "active+recovery_wait": return "#959595";
+				case "active+recovering": return "#aaaaaa";
+				case "stale+active+clean": return "#106e09";
+				case "stale+active+degraded": return "#c3bb00";
+				case "active+degraded": return "#e2d900";
+				case "active+clean+replay": return "#fff500";
+				case "peering": return "#ba1f69";
+				case "remapped+peering": return "#ba1f69";
+				case "active+recovering+remapped": return "#aaaaaa";
+				case "active+remapped": return "#00ac08";
+				case "active+recovery_wait+remapped": return "#959595";
+				case "creating": return "#80d2dc";
 				default: console.log(d.state); return "#000000";
 			}
 		default:
