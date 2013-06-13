@@ -17,7 +17,7 @@
   cursor: pointer;
 }
 
-.node circle {
+.node square {
   fill: #55aeba;
   stroke: #55aeba;
   //stroke-width: 2px;
@@ -30,7 +30,7 @@
 
 .link {
   fill: none;
-  stroke: #55aeba;
+  stroke: #dae2e2;
   stroke-width: 2px;
 }
 
@@ -43,6 +43,8 @@
 var margin = {top: 10, right: 120, bottom: 20, left: 120},
     width = 960 - margin.right - margin.left,
     height = 800 - margin.top - margin.bottom;
+
+var color = d3.scale.category20c();
     
 var i = 0,
     duration = 750,
@@ -99,18 +101,20 @@ function update(source) {
       .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
       .on("click", click);
 
-  nodeEnter.append("circle")
-      .attr("r", 1e-6)
+  nodeEnter.append("rect")
+      .attr("width", 8)
+      .attr("height", 16)
+      .attr("y", -8)
       .style("fill", function(d) {
 		switch (d.depth) {
-			case 0: return "#55aeba";
-			case 1: return "#55aeba";
-			case 2: return (d.status == "up" ? "green" : "red");
+			case 0: return "#5e6a71";
+			case 1: return color(d.name);
+			case 2: return (d.status == "up" ? "#00de00" : "#b51a00");
 		}
       });
-
+      
   nodeEnter.append("text")
-      .attr("x", function(d) { return d.children || d._children ? -15 : 15; })
+      .attr("x", function(d) { return d.children || d._children ? -6 : 6; })
       .attr("dy", ".35em")
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
       .text(function(d) { return d.name; })
@@ -121,13 +125,14 @@ function update(source) {
       .duration(duration)
       .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
 
-  nodeUpdate.select("circle")
-      .attr("r", 8)
+  nodeUpdate.select("rect")
+      .attr("width", 8)
+      .attr("height", 16)
       .style("fill", function(d) {
 		switch (d.depth) {
-			case 0: return "#55aeba";
-			case 1: return "#55aeba";
-			case 2: return (d.status == "up" ? "green" : "red");
+			case 0: return "#5e6a71";
+			case 1: return color(d.name);
+			case 2: return (d.status == "up" ? "#00de00" : "#b51a00");
 		}
       });
 
@@ -140,8 +145,9 @@ function update(source) {
       .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
       .remove();
 
-  nodeExit.select("circle")
-      .attr("r", 1e-6);
+  nodeExit.select("square")
+      .attr("width", 1e-6)
+      .attr("height", 1e-6);
 
   nodeExit.select("text")
       .style("fill-opacity", 1e-6);

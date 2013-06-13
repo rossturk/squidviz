@@ -76,8 +76,6 @@ label {
 }
 
 .widget {
-	//border: 1px solid #5E6A71;
-	//border-radius: 7px;
 	background-color: #e6e8e8;
 	width: 550px;
 	padding-top: 10px;
@@ -96,6 +94,10 @@ label {
 	background-color: #37424a;
 }
 
+#console-peek {
+	border-bottom: 2px solid #55aeba;
+}
+
 #logical {
 	height: 650px;
 }
@@ -107,32 +109,29 @@ label {
 }
 
 #iops {
-	// margin-top: 10px;
 	background-color: #f4f3f3;
 }
 
 #legend {
-	width: 1080px;
+	width: 1100px;
 	margin: 0;
-	padding: 10px;
+	padding: 0px;
 	border: 0;
 	overflow: hidden;
 
-	background-image: linear-gradient(bottom, rgb(209,209,209) 24%, rgb(230,232,232) 80%);
-	background-image: -o-linear-gradient(bottom, rgb(209,209,209) 24%, rgb(230,232,232) 80%);
-	background-image: -moz-linear-gradient(bottom, rgb(209,209,209) 24%, rgb(230,232,232) 80%);
-	background-image: -webkit-linear-gradient(bottom, rgb(209,209,209) 24%, rgb(230,232,232) 80%);
-	background-image: -ms-linear-gradient(bottom, rgb(209,209,209) 24%, rgb(230,232,232) 80%);
+	background-image: linear-gradient(bottom, rgb(215,215,215) 24%, rgb(230,232,232) 80%);
+	background-image: -o-linear-gradient(bottom, rgb(215,215,215) 24%, rgb(230,232,232) 80%);
+	background-image: -moz-linear-gradient(bottom, rgb(215,215,215) 24%, rgb(230,232,232) 80%);
+	background-image: -webkit-linear-gradient(bottom, rgb(215,215,215) 24%, rgb(230,232,232) 80%);
+	background-image: -ms-linear-gradient(bottom, rgb(215,215,215) 24%, rgb(230,232,232) 80%);
 
 	background-image: -webkit-gradient(
 		linear,
 		left bottom,
 		left top,
-		color-stop(0.24, rgb(209,209,209)),
-		color-stop(0.8, rgb(230,232,232))
+		color-stop(90%, rgb(228,228,228)),
+		color-stop(10%, rgb(222,222,222))
 	);
-	
-	//background-color: #a2a9ad;
 }
 
 #legend {
@@ -226,8 +225,8 @@ dl {
 
 dt {
         width: 200px;
-        border: 1px solid #37424a;
-        padding: 0px 8px;
+        border: 0px solid #5e6a71;
+        padding: 0px 4px;
 }
 
 dt, dd {
@@ -236,7 +235,10 @@ dt, dd {
 
 dd {
         font: 12px/1.2 'ApexSansBook', Helvetica, Arial, sans-serif;
-	margin: 0px 15px 0px 10px;
+	margin: 0px 15px 0px 5px;
+	text-transform: uppercase;
+	//position: relative;
+	//top: 3px;
 }
 </style>
 
@@ -279,11 +281,11 @@ $(document).ready(function(){
 	});
 	
 	$('#hide-console').click(function() {
-		$("#console").slideToggle();
+		$("#console").slideToggle(600);
 	});
 
 	$('#hide-legend').click(function() {
-		$("#legend").slideToggle();
+		$("#legend").slideToggle(300);
 	});
 
 	setTimeout("refreshPage()", 1000);
@@ -298,6 +300,9 @@ $(document).ready(function(){
 		<div class="header">
 			<img src="images/logo.png">
 			<h1><a id="hide-console" href="#">SquidViz</a> : Ceph Demo Visualizer</h1>
+		</div>
+
+		<div class="panel" id="console-peek">
 		</div>
 
 		<div class="panel" id="console">
