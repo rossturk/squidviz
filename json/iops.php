@@ -4,7 +4,8 @@ header("Content-Type: application/json");
 
 $file = shell_exec('ceph pg stat');
 
-$perf = explode(';',$file)[2];
+$bits = explode(';',$file);
+$perf = $bits[2];
 
 $iops = 0;
 preg_match('@(\d+)op/s@i', $perf, $matches);
