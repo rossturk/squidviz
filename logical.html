@@ -67,6 +67,7 @@ d3.json("json/pgdump.php", function(error, root) {
 
   var path = g.append("path")
     .attr("d", arc)
+    .attr("width", 0)
     .style("fill", function(d) {
 	switch (d.depth) {
 		case 0:
