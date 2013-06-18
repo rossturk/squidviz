@@ -108,7 +108,8 @@ function update(source) {
       .style("fill", function(d) {
 		switch (d.depth) {
 			case 0: return "#5e6a71";
-			case 1: return color(d.name);
+			case 1: return "#5e6a71";
+			//case 1: return color(d.name);
 			case 2: return (d.status == "up" ? "#00de00" : "#b51a00");
 		}
       });
@@ -117,7 +118,12 @@ function update(source) {
       .attr("x", function(d) { return d.children || d._children ? -6 : 6; })
       .attr("dy", ".35em")
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-      .text(function(d) { return d.name; })
+      .text(function(d) {
+		switch (d.depth) {
+			case 0: return "udx-1";
+			default: return d.name;
+		}
+      })
       .style("fill-opacity", 1e-6);
 
   // Transition nodes to their new position.
@@ -131,7 +137,8 @@ function update(source) {
       .style("fill", function(d) {
 		switch (d.depth) {
 			case 0: return "#5e6a71";
-			case 1: return color(d.name);
+			case 1: return "#5e6a71";
+			//case 1: return color(d.name);
 			case 2: return (d.status == "up" ? "#00de00" : "#b51a00");
 		}
       });
