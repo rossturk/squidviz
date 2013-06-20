@@ -34,7 +34,7 @@ foreach ( $pg_dump->pg_stats as $pg )
 		"state" => $pg->state
 	);
 
-	if ($pools[$pool] != "data" && $pools[$pool] != "metadata" && $pools[$pool] != "rbd") {
+	// if ($pools[$pool] != "data" && $pools[$pool] != "metadata" && $pools[$pool] != "rbd") {
 		if ($poolindex != -1) // existing pool
 		{
 			$pgTree['children'][$poolindex]['children'][] = $pgNode;
@@ -47,7 +47,7 @@ foreach ( $pg_dump->pg_stats as $pg )
 				"children" => array($pgNode)
 			);
    		}
-	}
+	//}
 }
 
 $output = json_encode($pgTree);

@@ -120,7 +120,7 @@ function update(source) {
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
       .text(function(d) {
 		switch (d.depth) {
-			case 0: return "udx-1";
+			case 0: return "ceph";
 			default: return d.name;
 		}
       })
