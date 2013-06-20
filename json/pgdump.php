@@ -33,19 +33,21 @@ foreach ( $pg_dump->pg_stats as $pg )
 		"objects" => $pg->stat_sum->num_objects,
 		"state" => $pg->state
 	);
-	
-	if ($poolindex != -1) // existing pool
-	{
-		$pgTree['children'][$poolindex]['children'][] = $pgNode;
+
+	if ($pools[$pool] != "data" && $pools[$pool] != "metadata" && $pools[$pool] != "rbd") {
+		if ($poolindex != -1) // existing pool
+		{
+			$pgTree['children'][$poolindex]['children'][] = $pgNode;
+		}
+		else
+		{
+			$pgTree['children'][] = array(
+				"name" => $pool,
+				"pool_name" => $pools[$pool],
+				"children" => array($pgNode)
+			);
+   		}
 	}
-	else
-	{
-		$pgTree['children'][] = array(
-			"name" => $pool,
-			"pool_name" => $pools[$pool],
-			"children" => array($pgNode)
-		);
-   	}
 }
 
 $output = json_encode($pgTree);
