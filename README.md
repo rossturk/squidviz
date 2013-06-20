@@ -14,6 +14,8 @@ The Physical tree does not update automatically so there's a refresh button.  Th
 
 There's a hidden terminal window (hint: click on the red "squidviz" in the header) and a hidden PG state legend (hint: click on "LOGICAL").  These are collapsed by default to keep things tidy, as SquidViz was originally built for demo purposes.
 
+Check out this video of [SquidViz in action](http://objects.dreamhost.com/rossturk/squidviz.mov).
+
 ## Wat SquidViz it is not?
 
 This was built as a demonstration and learning tool.  As such, there are a few things that SquidViz particularly is *not*.
