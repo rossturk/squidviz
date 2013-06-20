@@ -28,16 +28,20 @@ SquidViz is not an Inktank product.
 
 First, make sure that your machine has the right ceph.conf and client keyring. Then:
 
-### Install Apache and PHP.
+### Install Apache and PHP
+
+You will need a webserver with PHP for the server-side pieces.
 
 	apt-get install apache2 libapache2-mod-php5
 	a2enmod php5
 
-### Move the squidviz dir into your document root (often /var/www).
+### Add to document root
+
+Move the squidviz dir into your document root (often /var/www).
 
 	mv squidviz/ /var/www
 
-### Install shellinabox.
+### Install shellinabox
 
 If you're on Ubuntu 12.10:
 
@@ -49,7 +53,9 @@ If you're on Ubuntu 12.04, feel free to use the RPM provided.
 
 For other distros, you may have to build from source.
 
-### Configure Apache to proxy requests to shellinabox.
+### Configure Apache
+
+For shellinabox to work, you have to set up Apache to proxy requests to it.
 
 	<IfModule mod_proxy.c>
 	  <Location /shell>
@@ -57,7 +63,9 @@ For other distros, you may have to build from source.
 	  </Location>
 	</IfModule>
 
-### Configure shellinabox to use the custom CSS for maximum eye candy :) by adding this line to /etc/default/shellinabox:
+### Configure shellinabox
+
+There is some custom CSS for shellinabox that provides maximum eye candy. :)  Make it happen by adding this line to /etc/default/shellinabox:
 
 	SHELLINABOX_ARGS="--no-beep --localhost-only --service=/:SSH -t --static-file=styles.css:/var/www/squidviz/shell.css"
 
