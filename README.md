@@ -1,4 +1,4 @@
-# SquidViz README.md
+# SquidViz: Cluster Visualizer
 
 Oh hi!  I didn't see you there.  How are you?  Good!  SquidViz, yeah?
 
@@ -6,7 +6,7 @@ So SquidViz is a web-based visualizer for Ceph clusters, designed to help develo
 
 There's a server-side piece that grabs info from Ceph (using "ceph osd tree" and "ceph pg dump", both with --format=json) and rebuilds the JSON so that it's in the hierarchical form that D3 wants.  Then, through a ridiculous collection of iframes and javascript hacks, it comes alive with updates on your cluster health.
 
-# What SquidViz it is?
+## Wat SquidViz it is?
 
 SquidViz is a great way for visual learners to understand how Ceph reacts to change.  When OSDs go down, you can see how Ceph degrades PGs accordingly.  When new pools are created, you can see how the cluster allocates PGs.  When moving data in and out of the cluster, you can see a running iops sparkline.
 
@@ -14,7 +14,7 @@ The Physical tree does not update automatically so there's a refresh button.  Th
 
 There's a hidden terminal window (hint: click on the red "squidviz" in the header) and a hidden PG state legend (hint: click on "LOGICAL").  These are collapsed by default to keep things tidy, as SquidViz was originally built for demo purposes.
 
-# What SquidViz it is not?
+## Wat SquidViz it is not?
 
 This was built as a demonstration and learning tool.  As such, there are a few things that SquidViz particularly is *not*.
 
@@ -24,7 +24,7 @@ SquidViz is not part of the Ceph Project.
 
 SquidViz is not an Inktank product.
 
-# Installation
+## Installation
 
 First, make sure that your machine has the right ceph.conf and client keyring. Then:
 
