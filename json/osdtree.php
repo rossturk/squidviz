@@ -35,7 +35,7 @@ function buildNode($nodeID) {
 	return $return;
 }
 
-$nodeTree = buildNode(-3);
+$nodeTree = buildNode(-1);
 
 $output = json_encode($nodeTree);
 
