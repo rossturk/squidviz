@@ -71,3 +71,7 @@ There is some custom CSS for shellinabox that provides maximum eye candy. :)  Ma
 
 	SHELLINABOX_ARGS="--no-beep --localhost-only --service=/:SSH -t --static-file=styles.css:/var/www/squidviz/shell.css"
 
+## License
+
+SquidViz is licensed under the [MIT License](LICENSE).
+
